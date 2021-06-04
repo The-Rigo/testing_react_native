@@ -1,11 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
 export default function App() {
+  const [user, setUser]=useState("Alan")
+  const [fruit, setFruit]= useState({name:"orange", price:5})
+  const pressHandler = ()=>{
+    setUser("Peter")
+    setFruit({name:"Apple",price: 8})
+  }
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text style={styles.mytext}>{user} is eating {fruit.name}, which cost ${fruit.price}.</Text>
+      <View style ={styles.buttonstyle}>
+        <Button title = "Change"
+        onPress={pressHandler}
+        /></View> 
       <StatusBar style="auto" />
     </View>
   );
@@ -18,4 +28,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  buttonstyle:{
+    marginTop: 30
+  },
+  mytext:{
+    fontSize:40
+  }
 });
