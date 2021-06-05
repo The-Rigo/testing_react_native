@@ -65,8 +65,15 @@ export default function App() {
       "completed": true
     }])
   const pressHandler = (id)=>{
-    const selectedItem = (todos.filter(todo=>todo.id===id)[0])
-    alert(selectedItem.title)
+    let returnValue = [...todos];
+    returnValue.forEach(todo=>{
+      if(todo.id===id){
+        todo.completed = true
+      }
+    })
+    setTodos(returnValue)
+    /* const selectedItem = (todos.filter(todo=>todo.id===id)[0])
+    alert(selectedItem.title) */
     /* console.log(selectedItem) */
   }
   return (
@@ -77,7 +84,10 @@ export default function App() {
         data={todos}
         renderItem={({item})=>(
           <TouchableOpacity onPress={()=>pressHandler(item.id)}>
-            <Text style={styles.todo} >{item.title}</Text>
+            <Text style={{
+              ...styles.todo, backgroundColor:item.completed? 
+              'green':'deeppink'
+              }} >{item.title}</Text>
           </TouchableOpacity>
         )}
 
@@ -101,7 +111,7 @@ const styles = StyleSheet.create({
   },
   todo: {
     margin: 10,
-    backgroundColor: 'deeppink',
+    /* backgroundColor: 'deeppink', */
     color: 'white',
     fontSize: 10,
     padding:10
