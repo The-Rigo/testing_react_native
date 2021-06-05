@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 //ScroolView es que toca pantalla como mover a abajo o arriba
 //Flatlist es que mostrar lista
 export default function App() {
@@ -64,6 +64,11 @@ export default function App() {
       "title": "illo est ratione doloremque quia maiores aut",
       "completed": true
     }])
+  const pressHandler = (id)=>{
+    const selectedItem = (todos.filter(todo=>todo.id===id)[0])
+    alert(selectedItem.title)
+    /* console.log(selectedItem) */
+  }
   return (
     <View style={styles.container}>
       <FlatList
@@ -71,7 +76,9 @@ export default function App() {
         keyExtractor={(item)=>item.id.toString()}
         data={todos}
         renderItem={({item})=>(
-          <Text style={styles.todo} >{item.title}</Text>
+          <TouchableOpacity onPress={()=>pressHandler(item.id)}>
+            <Text style={styles.todo} >{item.title}</Text>
+          </TouchableOpacity>
         )}
 
       />
