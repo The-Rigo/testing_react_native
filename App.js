@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 //ScroolView es que toca pantalla como mover a abajo o arriba
+//Flatlist es que mostrar lista
 export default function App() {
   const [todos, setTodos]=useState([
     {
@@ -65,12 +66,21 @@ export default function App() {
     }])
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <FlatList
+        numColumns={3}
+        keyExtractor={(item)=>item.id.toString()}
+        data={todos}
+        renderItem={({item})=>(
+          <Text style={styles.todo} >{item.title}</Text>
+        )}
+
+      />
+      {/* <ScrollView>
       {todos.map(todo=>(<View key={todo.id} style={styles.todo}>
           <Text>Id:{todo.id} title: {todo.title}</Text>  
         </View>)
       )}
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 }
@@ -83,10 +93,10 @@ const styles = StyleSheet.create({
     //justifyContent: 'center',
   },
   todo: {
-    margin: 30,
+    margin: 10,
     backgroundColor: 'deeppink',
     color: 'white',
-    fontSize: 30,
-    padding:30
+    fontSize: 10,
+    padding:10
   }  
 });
