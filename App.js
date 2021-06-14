@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react';
-import { StyleSheet, Text, View, FlatList, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, SafeAreaView, Alert } from 'react-native';
 import Header from './components/Header'
 import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
@@ -15,10 +15,14 @@ export default function App() {
     ])
 
   const addTask = (text)=>{
-    setTasks(prevTasks=>{
-      return [{task:text, id:uuidv1()}
-        ,...prevTasks]
-    })
+    if(!text){
+      Alert.alert('No task?','Plase add a task')
+    }else{
+      setTasks(prevTasks=>{
+        return [{task:text, id:uuidv1()}
+          ,...prevTasks]
+      })  
+    }
   }
   return (
     <SafeAreaView style={styles.container}>
