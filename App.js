@@ -59,9 +59,13 @@ const styles = StyleSheet.create({
     
   },
   content:{
-    padding:30
+    padding:30,
+    backgroundColor:'green',
+    flex:1
   },
   list:{
-    marginTop:30
+    marginTop:30,
+    backgroundColor:'white',
+    flex:1
   }
 });
