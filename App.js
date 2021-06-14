@@ -3,6 +3,9 @@ import React,{useState} from 'react';
 import { StyleSheet, Text, View, FlatList, SafeAreaView } from 'react-native';
 import Header from './components/Header'
 import Tasks from './components/Tasks';
+import AddTask from './components/AddTask';
+import { v1 as uuidv1 } from 'uuid';
+
 export default function App() {
   /* https://gist.github.com/delapuente/9001607 */
   const [tasks, setTasks] = useState([
@@ -10,10 +13,18 @@ export default function App() {
     {"task":"CSS","done":true, "id":"2"},
     {"task":"Responsive design","done":true, "id":"3"}
     ])
+
+  const addTask = (text)=>{
+    setTasks(prevTasks=>{
+      return [{task:text, id:uuidv1()}
+        ,...prevTasks]
+    })
+  }
   return (
     <SafeAreaView style={styles.container}>
       <Header/>
       <View style={styles.content}>
+        <AddTask addTask={addTask}/>
         <View style={styles.list}>
           <FlatList
             data ={tasks}
